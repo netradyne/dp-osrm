@@ -394,6 +394,8 @@ function process_way(profile, way, result, relations)
   then
     return
   end
+  
+  result.name = way:id()
 
   handlers = Sequence {
     -- set the default mode for this profile. if can be changed later
@@ -449,7 +451,7 @@ function process_way(profile, way, result, relations)
     WayHandlers.driving_side,
 
     -- set name, ref and pronunciation
-    WayHandlers.names,
+    -- WayHandlers.names,
 
     -- set weight properties of the way
     WayHandlers.weights,
