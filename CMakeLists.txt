@@ -462,6 +462,9 @@ add_dependency_defines(-DBOOST_SPIRIT_USE_PHOENIX_V3)
 add_dependency_defines(-DBOOST_RESULT_OF_USE_DECLTYPE)
 add_dependency_defines(-DBOOST_FILESYSTEM_NO_DEPRECATED)
 
+# Workaround for https://github.com/boostorg/phoenix/issues/111
+add_dependency_defines(-DBOOST_PHOENIX_STL_TUPLE_H_)
+
 add_definitions(${OSRM_DEFINES})
 include_directories(SYSTEM ${DEPENDENCIES_INCLUDE_DIRS})
 
@@ -637,6 +640,10 @@ install(TARGETS osrm_guidance DESTINATION lib)
 
 # Install profiles and support library to /usr/local/share/osrm/profiles by default
 set(DefaultProfilesDir profiles)
+install(DIRECTORY ${DefaultProfilesDir} DESTINATION share/osrm)
+
+# Install data geojson files to /usr/local/share/osrm/data by default
+set(DefaultProfilesDir data)
 install(DIRECTORY ${DefaultProfilesDir} DESTINATION share/osrm)
 
 # Setup exporting variables for pkgconfig and subproject
